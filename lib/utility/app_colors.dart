@@ -6,4 +6,5 @@ class AppColors {
   static Color silverish = Color(0xFFFC5D1D8);
   static Color darkBackgroundColor = Color(0xFF050D10);
   static Color whiteTextColor = Color(0xFFFEFEFF);
+  static Color greyColor = Color(0xFFF0F0F0);
 }

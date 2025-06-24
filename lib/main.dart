@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gamers_tag/features/edu_exp/ui/edu_exp_screen.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,11 @@ class MyApp extends StatelessWidget {
             // This works for code too, not just values: Most code changes can be
             // tested with just a hot reload.
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            textTheme: GoogleFonts.montserratTextTheme(
+              Theme
+                  .of(context)
+                  .textTheme, // Apply to the existing theme's text styles
+            ),
           ),
           home: EduExpScreen(),
         );
