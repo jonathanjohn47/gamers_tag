@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gamers_tag/features/edu_exp/ui/edu_exp_screen.dart';
+import 'package:gamers_tag/utility/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +19,31 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(
+          themeMode: ThemeMode.dark, // Enable dark theme
+          darkTheme: ThemeData.dark().copyWith( // Configure dark theme
+            // This is the theme of your application.
+            //
+            // TRY THIS: Try running your application with "flutter run". You'll see
+            // the application has a purple toolbar. Then, without quitting the app,
+            // try changing the seedColor in the colorScheme below to Colors.green
+            // and then invoke "hot reload" (save your changes or press the "hot
+            // reload" button in a Flutter-supported IDE, or press "r" if you used
+            // the command line to start the app).
+            //
+            // Notice that the counter didn't reset back to zero; the application
+            // state is not lost during the reload. To reset the state, use hot
+            // restart instead.
+            //
+            // This works for code too, not just values: Most code changes can be
+            // tested with just a hot reload.
+            colorScheme: ColorScheme.fromSeed(seedColor: AppColors.darkPrimary, background: AppColors.darkBackgroundColor),
+            textTheme: GoogleFonts.montserratTextTheme(
+              Theme
+                  .of(context)
+                  .textTheme.apply(bodyColor: Colors.white, displayColor: Colors.white), // Apply to the existing theme's text styles
+            ),
+          ),
+          theme: ThemeData( // Configure light theme (optional, but good practice)
             // This is the theme of your application.
             //
             // TRY THIS: Try running your application with "flutter run". You'll see

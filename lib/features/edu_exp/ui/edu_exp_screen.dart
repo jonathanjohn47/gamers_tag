@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
 
 import '../get_controllers/edu_exp_get_controller.dart';
+import 'experience_screen.dart';
 
 class EduExpScreen extends StatelessWidget {
   EduExpScreen({super.key});
@@ -125,7 +126,9 @@ class EduExpScreen extends StatelessWidget {
                     Spacer(),
                     Padding(
                       padding: EdgeInsets.only(top: 8.0.sp,),
-                      child: RedButton(text: "ADD", onPressed: () {}),
+                      child: RedButton(text: "ADD", onPressed: () {
+                        Get.to(() => ExperienceScreen());
+                      }),
                     )
                   ],),
               ],
