@@ -1,6 +1,9 @@
+import 'package:dotted_line_flutter/dotted_line_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gamers_tag/components/red_button.dart';
 import 'package:gamers_tag/utility/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +21,7 @@ class ExperienceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: PixelPerfect(
+      child: kDebugMode ? PixelPerfect(
         assetPath: 'assets/images/img_1.png',
         scale: 1.85,
         child: Scaffold(
@@ -33,12 +36,23 @@ class ExperienceScreen extends StatelessWidget {
             },
           ),
         ),
+      ) : Scaffold(
+        backgroundColor: AppColors.darkBackgroundColor,
+        body: OrientationBuilder(
+          builder: (context, orientation) {
+            if (orientation == Orientation.portrait) {
+              return mobileUi();
+            } else {
+              return webUi();
+            }
+          },
+        ),
       ),
     );
   }
 
   Widget mobileUi() {
-    return Column(
+    return ListView(
       children: [
         Stack(
           children: [
@@ -134,7 +148,7 @@ class ExperienceScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 6.0.sp,
+                        horizontal: 5.0.sp,
                       ),
                       child: TextFormField(
                         style: TextStyle(
@@ -150,9 +164,7 @@ class ExperienceScreen extends StatelessWidget {
                             vertical: 6.0.sp,
                             horizontal: 12.0.sp,
                           ),
-                          // Adjust the vertical padding as needed
                           counterText: '',
-
                           filled: true,
                           fillColor: AppColors.greyColor,
                           isDense: true,
@@ -160,10 +172,390 @@ class ExperienceScreen extends StatelessWidget {
                           hintStyle: TextStyle(
                             color: AppColors.whiteTextColor.withOpacity(0.5),
                             fontFamily: GoogleFonts.jost().fontFamily,
-                            fontSize: 14.sp
-                          )
+                            fontSize: 14.sp,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide
+                                .none, // To remove the default border
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: AppColors
+                                  .greyColor, // Customize the border color if needed
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: AppColors.greyColor.withOpacity(
+                                  0.5), // Customize if needed
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: Colors
+                                  .red, // Customize the error border color if needed
+                            ),
+                          ),
                         ),
                       ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.0.sp,
+                        vertical: 4.sp,
+                      ),
+                      width: 1.sw - 10.sp,
+                      child: Text(
+                        "Company Name",
+                        style: TextStyle(
+                            color: AppColors.whiteTextColor,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts
+                                .jost()
+                                .fontFamily,
+                            fontSize: 16.sp
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.greyColor,
+                          // Specify the border color
+                          width: 1.0.sp, // Specify the border width
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.0.sp,
+                      ),
+                      child: TextFormField(
+                        style: TextStyle(
+                          color: AppColors.whiteTextColor,
+                          fontFamily: GoogleFonts
+                              .jost()
+                              .fontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10.sp,
+                        ),
+                        maxLength: 30,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 6.0.sp,
+                            horizontal: 12.0.sp,
+                          ),
+                          counterText: '',
+                          filled: true,
+                          fillColor: AppColors.greyColor,
+                          isDense: true,
+                          hintText: "Enter your company name",
+                          hintStyle: TextStyle(
+                            color: AppColors.whiteTextColor.withOpacity(0.5),
+                            fontFamily: GoogleFonts
+                                .jost()
+                                .fontFamily,
+                            fontSize: 14.sp,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide
+                                .none, // To remove the default border
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: AppColors
+                                  .greyColor, // Customize the border color if needed
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: AppColors.greyColor.withOpacity(
+                                  0.5), // Customize if needed
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: Colors
+                                  .red, // Customize the error border color if needed
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.0.sp,
+                        vertical: 4.sp,
+                      ),
+                      width: 1.sw - 10.sp,
+                      child: Text(
+                        "Employment Type",
+                        style: TextStyle(
+                            color: AppColors.whiteTextColor,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts
+                                .jost()
+                                .fontFamily,
+                            fontSize: 16.sp
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.greyColor,
+                          // Specify the border color
+                          width: 1.0.sp, // Specify the border width
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.0.sp,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          // Rotate to the next employment type
+                          int nextIndex = (getController
+                              .selectedEmploymentTypeIndex.value + 1) %
+                              getController.employmentTypes.length;
+                          getController.selectedEmploymentTypeIndex.value =
+                              nextIndex;
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.0.sp,
+                            vertical: 4.sp,
+                          ),
+                          width: 1.sw - 10.sp,
+                          child: Obx(() =>
+                              Text(
+                                getController.employmentTypes[getController
+                                    .selectedEmploymentTypeIndex.value],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: AppColors.lightPrimary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.sp),
+                              ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.greyColor,
+                            border: Border.all(
+                              color: AppColors.greyColor,
+                              // Specify the border color
+                              width: 1.0.sp, // Specify the border width
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.0.sp,
+                        vertical: 4.sp,
+                      ),
+                      width: 1.sw - 10.sp,
+                      child: Text(
+                        "Location",
+                        style: TextStyle(
+                            color: AppColors.whiteTextColor,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts
+                                .jost()
+                                .fontFamily,
+                            fontSize: 16.sp
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.greyColor,
+                          // Specify the border color
+                          width: 1.0.sp, // Specify the border width
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 5.0.sp,
+                      ),
+                      child: TextFormField(
+                        style: TextStyle(
+                          color: AppColors.whiteTextColor,
+                          fontFamily: GoogleFonts
+                              .jost()
+                              .fontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10.sp,
+                        ),
+                        maxLength: 30,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 6.0.sp,
+                            horizontal: 12.0.sp,
+                          ),
+                          counterText: '',
+                          filled: true,
+                          fillColor: AppColors.greyColor,
+                          isDense: true,
+                          hintText: "Search for location of the company",
+                          hintStyle: TextStyle(
+                            color: AppColors.whiteTextColor.withOpacity(0.5),
+                            fontFamily: GoogleFonts
+                                .jost()
+                                .fontFamily,
+                            fontSize: 14.sp,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide
+                                .none, // To remove the default border
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: AppColors
+                                  .greyColor, // Customize the border color if needed
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: AppColors.greyColor.withOpacity(
+                                  0.5), // Customize if needed
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.zero,
+                            borderSide: BorderSide(
+                              color: Colors
+                                  .red, // Customize the error border color if needed
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16.h),
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.0.sp,
+                            vertical: 4.sp,
+                          ),
+                          width: 1.sw - 10.sp,
+                          child: Text(
+                            "Company LinkedIn / Website",
+                            style: TextStyle(
+                                color: AppColors.whiteTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: GoogleFonts
+                                    .jost()
+                                    .fontFamily,
+                                fontSize: 16.sp
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.greyColor,
+                              // Specify the border color
+                              width: 1.0.sp, // Specify the border width
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5.0.sp,
+                          ),
+                          child: TextFormField(
+                            style: TextStyle(
+                              color: AppColors.whiteTextColor,
+                              fontFamily: GoogleFonts
+                                  .jost()
+                                  .fontFamily,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10.sp,
+                            ),
+                            maxLength: 30,
+                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 6.0.sp,
+                                horizontal: 12.0.sp,
+                              ),
+                              counterText: '',
+                              filled: true,
+                              fillColor: AppColors.greyColor,
+                              isDense: true,
+                              hintText: "Enter the Company website or LinkedIn profile",
+                              hintStyle: TextStyle(
+                                color: AppColors.whiteTextColor.withOpacity(
+                                    0.5),
+                                fontFamily: GoogleFonts
+                                    .jost()
+                                    .fontFamily,
+                                fontSize: 14.sp,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.zero,
+                                borderSide: BorderSide
+                                    .none, // To remove the default border
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.zero,
+                                borderSide: BorderSide(
+                                  color: AppColors
+                                      .greyColor, // Customize the border color if needed
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.zero,
+                                borderSide: BorderSide(
+                                  color: AppColors.greyColor.withOpacity(
+                                      0.5), // Customize if needed
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.zero,
+                                borderSide: BorderSide(
+                                  color: Colors
+                                      .red, // Customize the error border color if needed
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 36.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0.sp),
+                          child: RedButton(text: "CONFIRM",
+                            onPressed: () {},
+                            thick: true,
+                            expanded: true,),
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -171,6 +563,259 @@ class ExperienceScreen extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: 20.h),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(width: 28.sp,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 34.h,
+                  child: DottedLine(
+                    axis: Axis.vertical,
+                    colors: [AppColors.darkBackgroundColor],
+                    dashGap: 3.sp, dashWidth: 1.5.sp,),
+                ),
+                Container(
+                  height: 6.w, width: 6.w,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        AppColors.lightPrimary, AppColors.darkPrimary
+                      ])
+                  ),),
+                SizedBox(
+                  height: 35.h,
+                  child: DottedLine(
+                    axis: Axis.vertical,
+                    colors: [AppColors.greyColor],
+                    dashGap: 3.sp, dashWidth: 1.5.sp,),
+                ),
+
+              ],
+            ),
+            SizedBox(width: 3.sp,),
+            Column(
+              children: [
+                SizedBox(height: 12.h,),
+                SizedBox(
+                  height: 1.5.sp,
+                  width: 4.sp,
+                  child: DottedLine(
+                    axis: Axis.horizontal,
+                    colors: [AppColors.greyColor],
+                    dashGap: 3.sp, dashWidth: 1.5.sp,),
+                ),
+              ],
+            ),
+            SizedBox(width: 3.sp,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 10.0.sp, vertical: 8.sp),
+                  width: 1.sw - 68.sp,
+                  child: Text("Starting Date", style: TextStyle(
+                      color: AppColors.whiteTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                      fontFamily:
+                      GoogleFonts
+                          .jost()
+                          .fontFamily),),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.greyColor, // Specify the border color
+                      width: 1.0.sp, // Specify the border width
+                    ),
+
+                  ),),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 10.0.sp, vertical: 8.sp),
+                  width: 1.sw - 67.sp,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text("DATE", style: TextStyle(
+                            color: AppColors.whiteTextColor,
+                            fontWeight: FontWeight.bold),),
+                      ),Expanded(
+                        child: Text("SEPTEMBER",
+                          textAlign: TextAlign.center,style: TextStyle(
+                              color: AppColors.lightPrimary,
+                              fontWeight: FontWeight.bold),),
+                      ),Expanded(
+                        child: Text("2023",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: AppColors.lightPrimary,
+                              fontWeight: FontWeight.bold),),
+                      ),
+
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        AppColors.greyColor,
+                        Color(0xFF2A2A2A),
+                        AppColors.greyColor,
+                      ])
+
+                  ),),
+                /*SizedBox(height: 5.h,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.sp, vertical: 4.sp),
+                  width: 1.sw - 68.sp,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 17.h, width: 3.w,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              AppColors.lightPrimary, AppColors.darkPrimary
+                            ])
+                        ),),
+                      SizedBox(width: 10.sp,),
+                      Text("20 MAY 2025 - PRESENT", style: TextStyle(
+                          fontSize: 8.sp,
+                          color: AppColors.darkPrimary,
+                          fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+
+                  ),),*/
+              ],)
+          ],),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(width: 28.sp,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 34.h,
+                  child: DottedLine(
+                    axis: Axis.vertical,
+                    colors: [AppColors.greyColor],
+                    dashGap: 3.sp, dashWidth: 1.5.sp,),
+                ),
+                Container(
+                  height: 6.w, width: 6.w,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        AppColors.lightPrimary, AppColors.darkPrimary
+                      ])
+                  ),),
+                SizedBox(
+                  height: 65.h,
+                  child: DottedLine(
+                    axis: Axis.vertical,
+                    colors: [AppColors.darkBackgroundColor],
+                    dashGap: 3.sp, dashWidth: 1.5.sp,),
+                ),
+
+              ],
+            ),
+            SizedBox(width: 3.sp,),
+            Column(
+              children: [
+                SizedBox(height: 12.h,),
+                SizedBox(
+                  height: 1.5.sp,
+                  width: 4.sp,
+                  child: DottedLine(
+                    axis: Axis.horizontal,
+                    colors: [AppColors.greyColor],
+                    dashGap: 3.sp, dashWidth: 1.5.sp,),
+                ),
+              ],
+            ),
+            SizedBox(width: 3.sp,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 10.0.sp, vertical: 8.sp),
+                  width: 1.sw - 68.sp,
+                  child: Text("Ending Date", style: TextStyle(
+                      color: AppColors.whiteTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                      fontFamily:
+                      GoogleFonts
+                          .jost()
+                          .fontFamily),),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.greyColor, // Specify the border color
+                      width: 1.0.sp, // Specify the border width
+                    ),
+
+                  ),),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 10.0.sp, vertical: 8.sp),
+                  width: 1.sw - 67.sp,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text("DATE", style: TextStyle(
+                            color: AppColors.whiteTextColor,
+                            fontWeight: FontWeight.bold),),
+                      ),Expanded(
+                        child: Text("SEPTEMBER",
+                          textAlign: TextAlign.center,style: TextStyle(
+                            color: AppColors.lightPrimary,
+                            fontWeight: FontWeight.bold),),
+                        ),Expanded(
+                          child: Text("2023",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.lightPrimary,
+                              fontWeight: FontWeight.bold),),
+                        ),
+
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        AppColors.greyColor,
+                        Color(0xFF2A2A2A),
+                        AppColors.greyColor,
+                      ])
+
+                  ),),
+                /*SizedBox(height: 5.h,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.sp, vertical: 4.sp),
+                  width: 1.sw - 68.sp,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 17.h, width: 3.w,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              AppColors.lightPrimary, AppColors.darkPrimary
+                            ])
+                        ),),
+                      SizedBox(width: 10.sp,),
+                      Text("20 MAY 2025 - PRESENT", style: TextStyle(
+                          fontSize: 8.sp,
+                          color: AppColors.darkPrimary,
+                          fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+
+                  ),),*/
+              ],)
+          ],),
       ],
     );
   }
