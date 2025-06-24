@@ -1,4 +1,5 @@
 import 'package:dotted_line_flutter/dotted_line_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gamers_tag/components/red_button.dart';
@@ -17,7 +18,7 @@ class EduExpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: PixelPerfect(
+      child: kDebugMode? PixelPerfect(
         assetPath: 'assets/images/img.png',
         child: Scaffold(
           backgroundColor: AppColors.darkBackgroundColor,
@@ -30,6 +31,17 @@ class EduExpScreen extends StatelessWidget {
               }
             },
           ),
+        ),
+      ): Scaffold(
+        backgroundColor: AppColors.darkBackgroundColor,
+        body: OrientationBuilder(
+          builder: (context, orientation) {
+            if (orientation == Orientation.portrait) {
+              return mobileUi();
+            } else {
+              return webUi();
+            }
+          },
         ),
       ),
     );
@@ -373,13 +385,13 @@ class EduExpScreen extends StatelessWidget {
                             AppColors.lightPrimary, AppColors.darkPrimary
                           ])
                       ),),
-                    SizedBox(
+                    /*SizedBox(
                       height: 65.h,
                       child: DottedLine(
                         axis: Axis.vertical,
                         colors: [AppColors.greyColor],
                         dashGap: 3.sp, dashWidth: 1.5.sp,),
-                    ),
+                    ),*/
 
                   ],
                 ),
@@ -497,7 +509,7 @@ class EduExpScreen extends StatelessWidget {
                     SizedBox(width: 10.sp,),
                     Padding(
                       padding: EdgeInsets.only(top: 8.0.sp),
-                      child: Text("EXPERIENCE", style: TextStyle(
+                      child: Text("EDUCATION", style: TextStyle(
                           color: AppColors.whiteTextColor, fontSize: 15.sp),),
                     ),
                     Spacer(),
@@ -763,13 +775,13 @@ class EduExpScreen extends StatelessWidget {
                             AppColors.lightPrimary, AppColors.darkPrimary
                           ])
                       ),),
-                    SizedBox(
+                    /*SizedBox(
                       height: 65.h,
                       child: DottedLine(
                         axis: Axis.vertical,
                         colors: [AppColors.greyColor],
                         dashGap: 3.sp, dashWidth: 1.5.sp,),
-                    ),
+                    ),*/
 
                   ],
                 ),
