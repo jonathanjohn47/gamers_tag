@@ -18,7 +18,7 @@ class RedButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.greyColor.withOpacity(0.5), // Specify the border color
+            color: AppColors.greyColor, // Specify the border color
             width: 1.0.sp, // Specify the border width
           ),
         ),
